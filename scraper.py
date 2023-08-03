@@ -1,3 +1,5 @@
+#Figure out how to scrape into other pages 
+
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
