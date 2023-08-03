@@ -1,9 +1,10 @@
 #Figure out how to scrape into other pages 
-
+#Dyanmic scraping w selenium
+import urllib.request
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
-url_to_scrape = "https://www.kijiji.ca/v-apartments-condos/kitchener-waterloo/luxury-1-bedroom-apartment-for-rent/1658473493"
+url_to_scrape = "https://www.kijiji.ca/b-apartments-condos/kitchener-waterloo/c37l1700212"
 
 request_page = urlopen(url_to_scrape)
 page_html = request_page.read()
@@ -11,8 +12,8 @@ request_page.close()
 
 html_soup = BeautifulSoup(page_html, 'html.parser')
 
-house_title = html_soup.find_all('div', class_="realEstateTitle-1440881021" )
-
+house_title = html_soup.find_all('div', class_ ="sc-df900376.gsWCmx")
+print(house_title)
 filename = 'products.csv'
 f = open(filename, 'w')
 
@@ -21,12 +22,14 @@ headers = 'Title, Price \n'
 f.write(headers)
 
 for main in house_title:
-    title = main.find('h1', class_="title-2323565163").text
-    price = main.find('div', class_= "priceWrapper-1165431705").text
+    print("hello")
+    title = main.find('div', class_="sc-dab8bd1-0 bThYNJ").text
+    #price = main.find('h3', attrs={'data-testid': 'listing-title'}).text
 
-    f.write(title + ', ' + price)
+    f.write(title)
 
 f.close()
+print(page_html)
 
 '''
 house_unit = html_soup.find_all('div', class_ = "unitRow-1281171205")
