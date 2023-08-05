@@ -10,6 +10,7 @@ from bs4 import BeautifulSoup
 import requests
 from requests_html import HTMLSession
 import pandas as pd
+import csv
 
 url_to_scrape = "https://www.kijiji.ca/b-kitchener-waterloo/apartment-rent-in-kitchener/k0l1700212"
 
@@ -24,22 +25,27 @@ response.html.render()
 
 
 soup = BeautifulSoup(response.html.html, 'html.parser')
+listings = soup.find_all('div', class_ ="info-container")
 
 filename = 'products.csv'
 f = open(filename, 'w')
 headers = 'Title, Price \n'
 f.write(headers)
 
-listings = soup.find_all('div', class_ ="info-container")
 print("check 1")
+print(listings)
 for listing in listings:
     print("check 2")
     title = listing.find('div', class_="title").text
+    title =title.strip()
+    title = title.replace(",","")
     print("check 3")
-    price =listing.find('div', class_="price").text
+    price = listing.find('div', class_="price").text
+    price = price.strip()
+    price = price.replace(",", "")
 
-    f.write(title)
-    f.write(price)
+    f.write(title +','+price + '\n')
+    
 
 f.close()
 
