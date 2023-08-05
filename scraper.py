@@ -16,18 +16,31 @@ url_to_scrape = "https://www.kijiji.ca/b-kitchener-waterloo/apartment-rent-in-ki
 driver = webdriver.Chrome()
 driver.get(url_to_scrape)
 '''
-
+ 
 session = HTMLSession()
 response = session.get(url_to_scrape)
 response.html.render()
 
-print(response.html)
-print(response.html.find('div.sc-df900376 gsWCmx'))
-#soup = BeautifulSoup(response.content, 'html.parser')
 
-#house_title = soup.find_all('div', class_ ="sc-df900376.gsWCmx")
+soup = BeautifulSoup(response.html.html, 'html.parser')
 
-#print(house_title)
+filename = 'products.csv'
+f = open(filename, 'w')
+headers = 'Title, Price \n'
+f.write(headers)
+
+listings = soup.find_all('div', class_ ="info-container")
+print("check 1")
+for listing in listings:
+    print("check 2")
+    title = listing.find('div', class_="title").text
+    print("check 3")
+    price =listing.find('div', class_="price").text
+
+    f.write(title)
+    f.write(price)
+
+f.close()
 
 
 
