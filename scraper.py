@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 #from selenium.webdriver.support.ui import WebDriverWait
 import requests
 from requests_html import HTMLSession
+import pandas as pd
 
 url_to_scrape = "https://www.kijiji.ca/b-kitchener-waterloo/apartment-rent-in-kitchener/k0l1700212"
 
