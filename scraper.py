@@ -11,7 +11,7 @@ import requests
 from requests_html import HTMLSession
 import pandas as pd
 import csv
-
+tag_list=[]
 url_to_scrape = "https://www.kijiji.ca/b-kitchener-waterloo/apartment-rent-in-kitchener/k0l1700212"
 
 '''
@@ -29,11 +29,11 @@ listings = soup.find_all('div', class_ ="info-container")
 
 filename = 'products.csv'
 f = open(filename, 'w')
-headers = 'Title, Price \n'
+headers = 'Title, Price, Style, Bedrooms, Bathrooms, Size, Amenities \n'
 f.write(headers)
 
 print("check 1")
-print(listings)
+
 for listing in listings:
     print("check 2")
     title = listing.find('div', class_="title").text
@@ -46,11 +46,26 @@ for listing in listings:
     price = price.replace(",", "")
 
     link = listing.find("a", href = True)
-    weblink = "kijiji.ca" + link['href']
+    weblink = "https://www.kijiji.ca" + link['href']
+    print(weblink)
 
+    response = session.get(weblink)
+    response.html.render()
+    soup = BeautifulSoup(response.html.html, 'html.parser')
     
+    for tag in soup.find_all('li', class_='noLabelAttribute-2328647506'):
+        tag_list.append(tag)
+    style = tag_list[1].text
+    bedrooms = tag_list[2].text
+    bathrooms = tag_list[3].text
+    #style = soup.find('li', class_='noLabelAttribute-2328647506').text
+    #bedrooms = soup.find('li', class_='noLabelAttribute-2328647506').text
+    #bathrooms = soup.find('li', class_='noLabelAttribute-2328647506').text
+    size = soup.find('li', class_ = 'twoLinesAttribute-2286252302').text
+    amenities = soup.find('ul', class_ = 'list-1757374920 disablePadding-1318173106').text
 
-    f.write(title +','+price + '\n')
+    #f.write(title +','+price + '\n')
+    f.write(title +','+price + ',' +style + ',' +bedrooms +',' +bathrooms +',' +size + ',' + amenities + '\n')
     
 
 f.close()
