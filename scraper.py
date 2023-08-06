@@ -39,10 +39,16 @@ for listing in listings:
     title = listing.find('div', class_="title").text
     title =title.strip()
     title = title.replace(",","")
+
     print("check 3")
     price = listing.find('div', class_="price").text
     price = price.strip()
     price = price.replace(",", "")
+
+    link = listing.find("a", href = True)
+    weblink = "kijiji.ca" + link['href']
+
+    
 
     f.write(title +','+price + '\n')
     
