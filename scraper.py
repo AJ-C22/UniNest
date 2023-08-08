@@ -27,7 +27,7 @@ listings = soup.find_all('div', class_ ="info-container")
 #open csv file and write header name
 filename = 'products.csv'
 f = open(filename, 'w')
-headers = 'Title, Price, Style, Bedrooms, Bathrooms, Size, Air Conditioned \n'
+headers = 'Title, Price, Style, Bedrooms, Bathrooms, Size, Air Conditioned  \n'
 f.write(headers)
 
 print("check 1")
