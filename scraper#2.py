@@ -11,7 +11,7 @@ tag_list=[]
 size_list =[]
 
 #kijiji url
-url_to_scrape = "https://www.kijiji.ca/b-kitchener-waterloo/apartment-rent-in-kitchener/k0l1700212"
+url_to_scrape = "https://www.kijiji.ca/b-apartments-condos/ontario/london/k0c37l9004"
 
 #html request functions & rendering dynamic content
 session = HTMLSession()
@@ -22,10 +22,10 @@ response.html.render()
 soup = BeautifulSoup(response.html.html, 'html.parser')
 
 #storing repeating info-container content in a list
-listings = soup.find_all('div', class_ ="info-container")
+listings = soup.find_all('section', class_ ="sc-df900376-1 fPUcZd")
 
 #open csv file and write header name
-filename = 'kitchener.csv'
+filename = 'london.csv'
 f = open(filename, 'w')
 headers = 'Title, Price, Style, Bedrooms, Bathrooms, Size, Air Conditioned  \n'
 f.write(headers)
@@ -37,13 +37,13 @@ for listing in listings:
 
     print("check 2")
     #scrape title 
-    title = listing.find('div', class_="title").text
+    title = listing.find('h3', class_="sc-iBkjds beyHbd sc-df900376-7 dzZcLq").text
     title =title.strip()
     title = title.replace(",","")
 
     print("check 3")
     #scrape price
-    price = listing.find('div', class_="price").text
+    price = listing.find('div', class_="sc-dab8bd1-0 bThYNJ").text
     price = price.strip()
     price = price.replace(",", "")
 
