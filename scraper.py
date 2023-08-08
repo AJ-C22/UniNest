@@ -10,8 +10,19 @@ import csv
 tag_list=[]
 size_list =[]
 
+#kitchener = "https://www.kijiji.ca/b-kitchener-waterloo/apartment-rent-in-kitchener/k0l1700212"
+#london = "https://www.kijiji.ca/b-apartments-condos/ontario/london/k0c37l9004"
+
+#All 15km from uni
+kitchener = "https://www.kijiji.ca/b-apartments-condos/kitchener-waterloo/apartment-rent-in-kitchener/k0c37l1700212?sort=dateDesc&radius=15.0&address=University+of+Waterloo%2C+University+Avenue+West%2C+Waterloo%2C+ON&ll=43.472285%2C-80.544858"
+london = "https://www.kijiji.ca/b-apartments-condos/london/london/k0c37l1700214?sort=dateDesc&radius=15.0&address=Western+University%2C+Richmond+St%2C+London%2C+ON&ll=43.00959710000001%2C-81.2737336"
+toronto ="https://www.kijiji.ca/b-apartments-condos/city-of-toronto/apartment-for-rent/k0c37l1700273?sort=dateDesc&radius=15.0&address=University+of+Toronto%2C+King%27s+College+Circle%2C+Toronto%2C+ON&ll=43.6633848%2C-79.3960062"
+hamilton = "https://www.kijiji.ca/b-apartments-condos/hamilton/apartment-for-rent/k0c37l80014?address=McMaster%20University%2C%20Main%20Street%20West%2C%20Hamilton%2C%20ON&ll=43.260879%2C-79.9192254&radius=15.0&sort=dateDesc"
+ottawa = 'https://www.kijiji.ca/b-apartments-condos/ottawa/apartment-for-rent/k0c37l1700185?sort=dateDesc&radius=15.0&address=University+of+Ottawa%2C+Laurier+Ave+E%2C+Ottawa%2C+ON&ll=45.4231064%2C-75.68313289999999'
+guelph = 'https://www.kijiji.ca/b-apartments-condos/guelph/apartment-for-rent/k0c37l1700242?sort=dateDesc&radius=15.0&address=University+of+Guelph%2C+Stone+Road+East%2C+Guelph%2C+ON&ll=43.5327217%2C-80.22618039999999'
+
 #kijiji url
-url_to_scrape = "https://www.kijiji.ca/b-kitchener-waterloo/apartment-rent-in-kitchener/k0l1700212"
+url_to_scrape = kitchener
 
 #html request functions & rendering dynamic content
 session = HTMLSession()
@@ -27,7 +38,7 @@ listings = soup.find_all('div', class_ ="info-container")
 #open csv file and write header name
 filename = 'kitchener.csv'
 f = open(filename, 'w')
-headers = 'Title, Price, Style, Bedrooms, Bathrooms, Size, Air Conditioned  \n'
+headers = 'Title,Price,Style,Bedrooms,Bathrooms,Size,Air Conditioned  \n'
 f.write(headers)
 
 print("check 1")
