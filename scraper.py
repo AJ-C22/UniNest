@@ -12,7 +12,7 @@ size_list =[]
 
 #All 15km from uni
 kitchener = "https://www.kijiji.ca/b-apartments-condos/kitchener-waterloo/apartment-rent-in-kitchener/k0c37l1700212?sort=dateDesc&radius=15.0&address=University+of+Waterloo%2C+University+Avenue+West%2C+Waterloo%2C+ON&ll=43.472285%2C-80.544858"
-kitchener2 = "https://www.kijiji.ca/b-apartments-condos/kitchener-waterloo/apartment-rent-in-kitchener/page-2/k0c37l1700212?radius=15.0&ad=offering&address=University+of+Waterloo%2C+University+Avenue+West%2C+Waterloo%2C+ON&ll=43.472285,-80.544858"
+kitchener2 = "https://www.kijiji.ca/b-apartments-condos/kitchener-waterloo/apartment-rent-in-kitchener/page-2/k0c37l1700212?address=University%20of%20Waterloo%2C%20University%20Avenue%20West%2C%20Waterloo%2C%20ON&ll=43.472285%2C-80.544858&radius=15.0&sort=dateDesc"
 london = "https://www.kijiji.ca/b-apartments-condos/london/london/k0c37l1700214?sort=dateDesc&radius=15.0&address=Western+University%2C+Richmond+St%2C+London%2C+ON&ll=43.00959710000001%2C-81.2737336"
 london2 = "https://www.kijiji.ca/b-apartments-condos/london/london/page-2/k0c37l1700214?address=Western%20University%2C%20Richmond%20St%2C%20London%2C%20ON&ll=43.00959710000001%2C-81.2737336&radius=15.0&sort=dateDesc"
 toronto ="https://www.kijiji.ca/b-apartments-condos/city-of-toronto/apartment-for-rent/k0c37l1700273?sort=dateDesc&radius=15.0&address=University+of+Toronto%2C+King%27s+College+Circle%2C+Toronto%2C+ON&ll=43.6633848%2C-79.3960062"
@@ -25,7 +25,8 @@ guelph = 'https://www.kijiji.ca/b-apartments-condos/guelph/apartment-for-rent/k0
 guelph2 = 'https://www.kijiji.ca/b-apartments-condos/guelph/apartment-for-rent/page-2/k0c37l1700242?address=University%20of%20Guelph%2C%20Stone%20Road%20East%2C%20Guelph%2C%20ON&ll=43.5327217%2C-80.22618039999999&radius=15.0&sort=dateDesc'
 
 #kijiji url
-url_to_scrape = kitchener
+url_to_scrape = guelph
+location = "Guelph"
 
 #scrape twice
 for i in range(1,3):
@@ -41,9 +42,9 @@ for i in range(1,3):
     listings = soup.find_all('div', class_ ="info-container")
 
     #open csv file and write header name
-    filename = 'toronto.csv'
+    filename = 'guelph.csv'
     f = open(filename, 'w')
-    headers = 'Title,Price,Style,Bedrooms,Bathrooms,Size,Air Conditioned  \n'
+    headers = 'Location,Title,Price,Style,Bedrooms,Bathrooms,Size,Air Conditioned  \n'
     f.write(headers)
 
     print("check 1")
@@ -62,11 +63,6 @@ for i in range(1,3):
         price = listing.find('div', class_="price").text
         price = price.strip()
         price = price.replace(",", "")
-
-        #scrape location
-        location = listing.find('div', class_="location").text
-        location = location.strip()
-        location = location.replace(",","")
 
         #scrape nested link
         link = listing.find("a", href = True)
@@ -116,7 +112,7 @@ for i in range(1,3):
             pass
 
     #next page
-    url_to_scrape = kitchener2
+    url_to_scrape = guelph2
 
 #close csv file
 f.close()
