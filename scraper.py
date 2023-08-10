@@ -25,8 +25,8 @@ guelph = 'https://www.kijiji.ca/b-apartments-condos/guelph/apartment-for-rent/k0
 guelph2 = 'https://www.kijiji.ca/b-apartments-condos/guelph/apartment-for-rent/page-2/k0c37l1700242?address=University%20of%20Guelph%2C%20Stone%20Road%20East%2C%20Guelph%2C%20ON&ll=43.5327217%2C-80.22618039999999&radius=15.0&sort=dateDesc'
 
 #kijiji url
-url_to_scrape = guelph
-location = "Guelph"
+url_to_scrape = toronto2
+location = "Toronto"
 
 #scrape twice
 for i in range(1,3):
@@ -42,8 +42,8 @@ for i in range(1,3):
     listings = soup.find_all('div', class_ ="info-container")
 
     #open csv file and write header name
-    filename = 'guelph.csv'
-    f = open(filename, 'w')
+    filename = 'toronto.csv'
+    f = open(filename, 'a')
     headers = 'Location,Title,Price,Style,Bedrooms,Bathrooms,Size,Air Conditioned  \n'
     f.write(headers)
 
@@ -112,7 +112,7 @@ for i in range(1,3):
             pass
 
     #next page
-    url_to_scrape = guelph2
+    url_to_scrape = toronto2
 
 #close csv file
 f.close()
