@@ -16,7 +16,7 @@ df["Bedrooms"] = df["Bedrooms"].str.replace('Bedrooms: ', '')
 df["Bathrooms"] = df["Bathrooms"].str.replace('Bathrooms: ', '')
 
 #Turn "Not Available" to "N/A"
-df["Size"] = df["Size"].str.replace('Not Available', 'N/A')
+df["Size(sqft)"] = df["Size(sqft)"].str.replace('Not Available', 'N/A')
 
 #Parse bedrooms (den, studio)
 df['Den'] = np.where(df["Bedrooms"].str.find("Den") > 0, "Yes", "No")
@@ -28,3 +28,10 @@ print(df)
 
 #Remove incorrectly scraped data
 df = df[df["Style"].str.contains("No") == False]
+
+#Remove dollar sign
+df["Price($)"] = df["Price($)"].str.replace('$', '')
+df["Price($)"] = df["Price($)"].str.replace('.00', '')
+
+#Turn df into csv
+df.to_csv("housing_cleaned.csv")
