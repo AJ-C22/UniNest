@@ -9,27 +9,21 @@ import csv
 #tag lists
 tag_list=[]
 size_list =[]
-
+link_list = ['https://www.kijiji.ca/b-apartments-condos/london/page-2/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-3/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-4/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-5/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-6/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-7/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-8/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-9/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-10/c37l1700214']
 #All 15km from uni
-kitchener = "https://www.kijiji.ca/b-apartments-condos/kitchener-waterloo/apartment-rent-in-kitchener/k0c37l1700212?sort=dateDesc&radius=15.0&address=University+of+Waterloo%2C+University+Avenue+West%2C+Waterloo%2C+ON&ll=43.472285%2C-80.544858"
-kitchener2 = "https://www.kijiji.ca/b-apartments-condos/kitchener-waterloo/apartment-rent-in-kitchener/page-2/k0c37l1700212?address=University%20of%20Waterloo%2C%20University%20Avenue%20West%2C%20Waterloo%2C%20ON&ll=43.472285%2C-80.544858&radius=15.0&sort=dateDesc"
-london = "https://www.kijiji.ca/b-apartments-condos/london/london/k0c37l1700214?sort=dateDesc&radius=15.0&address=Western+University%2C+Richmond+St%2C+London%2C+ON&ll=43.00959710000001%2C-81.2737336"
-london2 = "https://www.kijiji.ca/b-apartments-condos/london/london/page-2/k0c37l1700214?address=Western%20University%2C%20Richmond%20St%2C%20London%2C%20ON&ll=43.00959710000001%2C-81.2737336&radius=15.0&sort=dateDesc"
+kitchener = "https://www.kijiji.ca/b-apartments-condos/kitchener-waterloo/c37l1700212 "
+london = "https://www.kijiji.ca/b-apartments-condos/london/c37l1700214?sort=dateDesc"
 toronto ="https://www.kijiji.ca/b-apartments-condos/city-of-toronto/apartment-for-rent/k0c37l1700273?sort=dateDesc&radius=15.0&address=University+of+Toronto%2C+King%27s+College+Circle%2C+Toronto%2C+ON&ll=43.6633848%2C-79.3960062"
-toronto2 = "https://www.kijiji.ca/b-apartments-condos/city-of-toronto/apartment-for-rent/page-2/k0c37l1700273?address=University%20of%20Toronto%2C%20King%27s%20College%20Circle%2C%20Toronto%2C%20ON&ll=43.6633848%2C-79.3960062&radius=15.0&sort=dateDesc"
 hamilton = "https://www.kijiji.ca/b-apartments-condos/hamilton/apartment-for-rent/k0c37l80014?address=McMaster%20University%2C%20Main%20Street%20West%2C%20Hamilton%2C%20ON&ll=43.260879%2C-79.9192254&radius=15.0&sort=dateDesc"
-hamilton2 = "https://www.kijiji.ca/b-apartments-condos/hamilton/apartment-for-rent/page-2/k0c37l80014?address=McMaster%20University%2C%20Main%20Street%20West%2C%20Hamilton%2C%20ON&ll=43.260879%2C-79.9192254&radius=15.0&sort=dateDesc%5C"
 ottawa = 'https://www.kijiji.ca/b-apartments-condos/ottawa/apartment-for-rent/k0c37l1700185?sort=dateDesc&radius=15.0&address=University+of+Ottawa%2C+Laurier+Ave+E%2C+Ottawa%2C+ON&ll=45.4231064%2C-75.68313289999999'
-ottawa2 = 'https://www.kijiji.ca/b-apartments-condos/ottawa/apartment-for-rent/page-2/k0c37l1700185?address=University%20of%20Ottawa%2C%20Laurier%20Ave%20E%2C%20Ottawa%2C%20ON&ll=45.4231064%2C-75.68313289999999&radius=15.0&sort=dateDesc'
 guelph = 'https://www.kijiji.ca/b-apartments-condos/guelph/apartment-for-rent/k0c37l1700242?sort=dateDesc&radius=15.0&address=University+of+Guelph%2C+Stone+Road+East%2C+Guelph%2C+ON&ll=43.5327217%2C-80.22618039999999'
-guelph2 = 'https://www.kijiji.ca/b-apartments-condos/guelph/apartment-for-rent/page-2/k0c37l1700242?address=University%20of%20Guelph%2C%20Stone%20Road%20East%2C%20Guelph%2C%20ON&ll=43.5327217%2C-80.22618039999999&radius=15.0&sort=dateDesc'
 
 #kijiji url
-url_to_scrape = toronto2
-location = "Toronto"
+url_to_scrape = london
+location = "London"
 
 #scrape twice
-for i in range(1,3):
+for i in range(0,9):
     #html request functions & rendering dynamic content
     session = HTMLSession()
     response = session.get(url_to_scrape)
@@ -42,7 +36,7 @@ for i in range(1,3):
     listings = soup.find_all('div', class_ ="info-container")
 
     #open csv file and write header name
-    filename = 'toronto.csv'
+    filename = 'london.csv'
     f = open(filename, 'a')
     headers = 'Location,Title,Price,Style,Bedrooms,Bathrooms,Size,Air Conditioned  \n'
     f.write(headers)
@@ -81,11 +75,20 @@ for i in range(1,3):
             for tag in soup.find_all('li', class_='noLabelAttribute-2328647506'):
                 tag_list.append(tag)
             #scrape style
-            style = tag_list[0].text
+            try:
+                style = tag_list[0].text
+            except:
+                style = "N/A"
             #scrape bedrooms
-            bedrooms = tag_list[1].text
+            try:
+                bedrooms = tag_list[1].text
+            except:
+                bedrooms = "N/A"
             #scrape bathrooms
-            bathrooms = tag_list[2].text
+            try: 
+                bathrooms = tag_list[2].text
+            except:
+                bathrooms = "N/A"
             #clear list
             tag_list.clear()
 
@@ -112,8 +115,18 @@ for i in range(1,3):
             pass
 
     #next page
-    url_to_scrape = toronto2
+    '''
+    link_list = []
+    link = soup.find("div", class_= "pagination")
 
+    newlinks = link.find_all("a", href = True)
+
+    for newlink in newlinks:
+        weblink = "https://www.kijiji.ca" + newlink['href']
+        link_list.append(weblink)
+    '''
+    url_to_scrape = link_list[i]
+    
 #close csv file
 f.close()
 
