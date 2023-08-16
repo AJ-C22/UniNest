@@ -33,6 +33,8 @@ df = df[df["Style"].str.contains("No") == False]
 df["Price($)"] = df["Price($)"].str.replace('$', '')
 df["Price($)"] = df["Price($)"].str.replace('.00', '')
 
+#Remove "Please Contact" prices
+df = df[df["Price($)"].str.contains("Please Contact") == False]
 
 #Turn df into csv
 df.to_csv("housing_cleaned.csv")
