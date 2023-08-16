@@ -9,21 +9,21 @@ import csv
 #tag lists
 tag_list=[]
 size_list =[]
-link_list = ['https://www.kijiji.ca/b-apartments-condos/london/page-2/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-3/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-4/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-5/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-6/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-7/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-8/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-9/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-10/c37l1700214']
+link_list = ['https://www.kijiji.ca/b-apartments-condos/guelph/apartment-rent/page-2/k0c37l1700242', 'https://www.kijiji.ca/b-apartments-condos/guelph/apartment-rent/page-3/k0c37l1700242', 'https://www.kijiji.ca/b-apartments-condos/guelph/apartment-rent/page-2/k0c37l1700242', 'https://www.kijiji.ca/rss-srp-apartments-condos/guelph/apartment-rent/k0c37l1700242']
 #All 15km from uni
-kitchener = "https://www.kijiji.ca/b-apartments-condos/kitchener-waterloo/c37l1700212 "
+kitchener = "https://www.kijiji.ca/b-apartments-condos/kitchener-waterloo/c37l1700212"
 london = "https://www.kijiji.ca/b-apartments-condos/london/c37l1700214?sort=dateDesc"
-toronto ="https://www.kijiji.ca/b-apartments-condos/city-of-toronto/apartment-for-rent/k0c37l1700273?sort=dateDesc&radius=15.0&address=University+of+Toronto%2C+King%27s+College+Circle%2C+Toronto%2C+ON&ll=43.6633848%2C-79.3960062"
-hamilton = "https://www.kijiji.ca/b-apartments-condos/hamilton/apartment-for-rent/k0c37l80014?address=McMaster%20University%2C%20Main%20Street%20West%2C%20Hamilton%2C%20ON&ll=43.260879%2C-79.9192254&radius=15.0&sort=dateDesc"
-ottawa = 'https://www.kijiji.ca/b-apartments-condos/ottawa/apartment-for-rent/k0c37l1700185?sort=dateDesc&radius=15.0&address=University+of+Ottawa%2C+Laurier+Ave+E%2C+Ottawa%2C+ON&ll=45.4231064%2C-75.68313289999999'
-guelph = 'https://www.kijiji.ca/b-apartments-condos/guelph/apartment-for-rent/k0c37l1700242?sort=dateDesc&radius=15.0&address=University+of+Guelph%2C+Stone+Road+East%2C+Guelph%2C+ON&ll=43.5327217%2C-80.22618039999999'
+toronto ="https://www.kijiji.ca/b-apartments-condos/city-of-toronto/apartment-rent/k0c37l1700273?sort=dateDesc"
+hamilton = "https://www.kijiji.ca/b-apartments-condos/hamilton/apartment-rent/k0c37l80014?sort=dateDesc"
+ottawa = 'https://www.kijiji.ca/b-apartments-condos/ottawa/apartment-rent/k0c37l1700185?sort=dateDesc'
+guelph = 'https://www.kijiji.ca/b-apartments-condos/guelph/apartment-rent/k0c37l1700242?sort=dateDesc'
 
 #kijiji url
-url_to_scrape = london
-location = "London"
+url_to_scrape = guelph
+location = "Guelph"
 
 #scrape twice
-for i in range(0,9):
+for i in range(0,13):
     #html request functions & rendering dynamic content
     session = HTMLSession()
     response = session.get(url_to_scrape)
@@ -36,7 +36,7 @@ for i in range(0,9):
     listings = soup.find_all('div', class_ ="info-container")
 
     #open csv file and write header name
-    filename = 'london.csv'
+    filename = 'guelph.csv'
     f = open(filename, 'a')
     headers = 'Location,Title,Price,Style,Bedrooms,Bathrooms,Size,Air Conditioned  \n'
     f.write(headers)
@@ -96,20 +96,28 @@ for i in range(0,9):
             for size in soup.find_all('dd', class_='twoLinesValue-2815147826'):
                 size_list.append(size)\
             #ensure size listing is an integer
-            if size_list[3].text == "Yes" or size_list[3].text == "No":
+            try:
+                if size_list[3].text == "Yes" or size_list[3].text == "No":
                 #scrape size
-                size = size_list[4].text.replace(",","")
-            else:
+                    size = size_list[4].text.replace(",","")
+                else:
                 #scrape size
-                size = size_list[3].text.replace(",","")
+                    size = size_list[3].text.replace(",","")
+            except:
+                size = "N/A"
             #scrape air conditioning
-            air_conditioned = size_list[5].text.replace(",","")
+            try: 
+                air_conditioned = size_list[5].text.replace(",","")
+            except:
+                air_conditioned = "N/A"
             #clear list
             size_list.clear()
 
             #write scraped info into csv file
-            f.write(location +', '+ title +', '+price + ', ' + style + ', ' +bedrooms +', ' +bathrooms +', ' +size + ', ' + air_conditioned +'\n')
-
+            try:
+                f.write(location +', '+ title +', '+price + ', ' + style + ', ' +bedrooms +', ' +bathrooms +', ' +size + ', ' + air_conditioned +'\n')
+            except:
+                f.write("\n")
         #if not apartment listing, rerun loop
         else: 
             pass

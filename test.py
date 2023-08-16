@@ -8,9 +8,9 @@ import csv
 
 
 
-link_list = ['https://www.kijiji.ca/b-apartments-condos/london/page-2/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-3/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-4/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-5/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-6/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-7/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-8/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-9/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-10/c37l1700214', 'https://www.kijiji.ca/b-apartments-condos/london/page-2/c37l1700214', 'https://www.kijiji.ca/rss-srp-apartments-condos/london/c37l1700214']
+link_list = ['https://www.kijiji.ca/b-apartments-condos/ottawa/apartment-rent/page-2/k0c37l1700185', 'https://www.kijiji.ca/b-apartments-condos/ottawa/apartment-rent/page-3/k0c37l1700185', 'https://www.kijiji.ca/b-apartments-condos/ottawa/apartment-rent/page-4/k0c37l1700185', 'https://www.kijiji.ca/b-apartments-condos/ottawa/apartment-rent/page-5/k0c37l1700185', 'https://www.kijiji.ca/b-apartments-condos/ottawa/apartment-rent/page-6/k0c37l1700185', 'https://www.kijiji.ca/b-apartments-condos/ottawa/apartment-rent/page-7/k0c37l1700185', 'https://www.kijiji.ca/b-apartments-condos/ottawa/apartment-rent/page-8/k0c37l1700185', 'https://www.kijiji.ca/b-apartments-condos/ottawa/apartment-rent/page-9/k0c37l1700185', 'https://www.kijiji.ca/b-apartments-condos/ottawa/apartment-rent/page-10/k0c37l1700185', 'https://www.kijiji.ca/b-apartments-condos/ottawa/apartment-rent/page-2/k0c37l1700185', 'https://www.kijiji.ca/rss-srp-apartments-condos/ottawa/apartment-rent/k0c37l1700185']
 link_list1 = []
-kitchener = "https://www.kijiji.ca/b-apartments-condos/london/c37l1700214?sort=dateDesc"
+kitchener = "https://www.kijiji.ca/b-apartments-condos/guelph/apartment-rent/k0c37l1700242?sort=dateDesc"
 url_to_scrape = kitchener
 session = HTMLSession()
 response = session.get(url_to_scrape)
