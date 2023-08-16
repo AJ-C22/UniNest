@@ -35,4 +35,4 @@ df["Price($)"] = df["Price($)"].str.replace('.00', '')
 
 
 #Turn df into csv
-#df.to_csv("housing_cleaned.csv")
+df.to_csv("housing_cleaned.csv")
