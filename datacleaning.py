@@ -20,6 +20,7 @@ df = df[df["Bathrooms"].str.contains("N/A") == False]
 #Turn "Not Available" to "N/A"
 df["Size(sqft)"] = df["Size(sqft)"].str.replace('Not Available', 'N/A')
 
+
 #Parse bedrooms (den, studio)
 df['Den'] = np.where(df["Bedrooms"].str.find("Den") > 0, "Yes", "No")
 df["Bedrooms"] = df["Bedrooms"].str.replace('+ Den', '')
@@ -41,6 +42,8 @@ df["Price"] = df["Price"].str.replace('.00', '')
 df = df[df["Price"].str.contains("Please Contact") == False]
 df = df = df[df["Title"].str.contains("Please Contact") == False]
 
+#Ensure price is numeric value only
+df = df[df["Price"].str.contains("House") == False]
 
 #Turn df into csv
 df.to_csv("housing_cleaned.csv")
