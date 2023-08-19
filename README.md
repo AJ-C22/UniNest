@@ -12,5 +12,5 @@ Data geared project designed to project housing market prices in University citi
 ## Resources & Packages Used
 **Python Version:** 3.11.4  
 **Packages:** pandas, numpy, sklearn, matplotlib, seaborn, html-requests
-**EDA video:** https://www.youtube.com/watch?v=QWgg4w1SpJ8&list=PL2zq7klxX5ASFejJj80ob9ZAnBHdz5O1t&index=4&t=2011s&ab_channel=KenJee
+**Scraper Article:** https://towardsdatascience.com/selenium-tutorial-scraping-glassdoor-com-in-10-minutes-3d0915c6d905
 
