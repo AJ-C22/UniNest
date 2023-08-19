@@ -1,5 +1,6 @@
 # Uni Housing Market Projection Project: Overview
 **Medium Artcile:**
+
 Data geared project designed to project housing market prices in University cities
 
 ## Web Scraping
