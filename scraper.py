@@ -9,7 +9,7 @@ import csv
 #tag lists
 tag_list=[]
 size_list =[]
-link_list = ['https://www.kijiji.ca/b-apartments-condos/guelph/apartment-rent/page-2/k0c37l1700242', 'https://www.kijiji.ca/b-apartments-condos/guelph/apartment-rent/page-3/k0c37l1700242', 'https://www.kijiji.ca/b-apartments-condos/guelph/apartment-rent/page-2/k0c37l1700242', 'https://www.kijiji.ca/rss-srp-apartments-condos/guelph/apartment-rent/k0c37l1700242']
+link_list = []
 #All 15km from uni
 kitchener = "https://www.kijiji.ca/b-apartments-condos/kitchener-waterloo/c37l1700212"
 london = "https://www.kijiji.ca/b-apartments-condos/london/c37l1700214?sort=dateDesc"
@@ -123,7 +123,6 @@ for i in range(0,13):
             pass
 
     #next page
-    '''
     link_list = []
     link = soup.find("div", class_= "pagination")
 
@@ -132,7 +131,6 @@ for i in range(0,13):
     for newlink in newlinks:
         weblink = "https://www.kijiji.ca" + newlink['href']
         link_list.append(weblink)
-    '''
     url_to_scrape = link_list[i]
     
 #close csv file
