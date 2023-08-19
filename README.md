@@ -11,6 +11,7 @@ Data geared project designed to project housing market prices in University citi
 
 ## Resources & Packages Used
 **Python Version:** 3.11.4
+
 **Packages:** pandas, numpy, sklearn, matplotlib, seaborn, html-requests 
 
 
