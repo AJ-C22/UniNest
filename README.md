@@ -19,6 +19,9 @@ Created a web scraper from scratch using Python and HTML-Requests to scrape the 
 ## Data Cleaning
 
 ## Exploratory Data Analysis
+Analyzed the clean data and making bar, scatterplot and heatmap graphs using Tableau & Jupyter Notebook [Seaborn, Matplotlib]
+
+The following graphs analyze relationships between the various data columns including Size, Price, Bathrooms, Bedrooms, Location and Den status:
 
 ## Model Building & Projection
 
