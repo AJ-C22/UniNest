@@ -19,6 +19,8 @@ Created a web scraper from scratch using Python and HTML-Requests to scrape the 
 ## Data Cleaning
 Cleaned the raw data scraped from Kijiji to use for EDA, graph plotting, and model building. The cleaning included:
 
+*  Removing "Wanted" listings
+
 ## Exploratory Data Analysis
 Analyzed the clean data and making bar, scatterplot and heatmap graphs using Tableau & Jupyter Notebook [Seaborn, Matplotlib]
 
