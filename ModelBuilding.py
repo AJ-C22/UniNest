@@ -1,5 +1,5 @@
-import pandas as pandas
-import matplotlib.pylot as plt
+import pandas as pd
+import matplotlib.pyplot as plt 
 import numpy as np 
 
 df = pd.read_csv('housing_cleaned.csv')
@@ -15,11 +15,22 @@ df['Bedrooms'] = df["Bedrooms"].astype(float)
 df['Bathrooms'] = df["Bathrooms"].astype(float)
 
 #Choose relevant columns
-df.columns
-df_model = df[['Location']]
+print(df.columns)
+df_model = df2[['Location', 'Price', 'Style', 'Bedrooms', 'Bathrooms', 'Size(sqft)', 'Den']]
+
 #Get dummy data
+df_dum = pd.get_dummies(df_model)
+
 #Train test split
+from sklearn.model_selection import train_test_split
+
+X = df_dum.drop('Price', axis =1)
+y=df_dum.Price.values
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
 #Multiple linear regression
+
 #Lasso regression
 #Random Forest
 #Tune models
