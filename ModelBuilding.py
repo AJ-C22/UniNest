@@ -15,6 +15,8 @@ df['Bedrooms'] = df["Bedrooms"].astype(float)
 df['Bathrooms'] = df["Bathrooms"].astype(float)
 
 #Choose relevant columns
+df.columns
+df_model = df[['Location']]
 #Get dummy data
 #Train test split
 #Multiple linear regression
