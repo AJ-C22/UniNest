@@ -25,11 +25,18 @@ df_dum = pd.get_dummies(df_model)
 from sklearn.model_selection import train_test_split
 
 X = df_dum.drop('Price', axis =1)
-y=df_dum.Price.values
+y = df_dum.Price.values
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 #Multiple linear regression
+import statsmodels.api as sm
+
+X_sm = X 
+
+#X = sm.add_constant(X)
+#model = sm.OLS(y,X_sm)
+#model.fit().summary()
 
 #Lasso regression
 #Random Forest
