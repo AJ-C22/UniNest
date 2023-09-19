@@ -19,7 +19,7 @@ print(df.columns)
 df_model = df2[['Location', 'Price', 'Style', 'Bedrooms', 'Bathrooms', 'Size(sqft)', 'Den']]
 
 #Get dummy data
-df_dum = pd.get_dummies(df_model)
+df_dum = pd.get_dummies(df_model, dtype = int)
 
 #Train test split
 from sklearn.model_selection import train_test_split
@@ -34,9 +34,9 @@ import statsmodels.api as sm
 
 X_sm = X 
 
-#X = sm.add_constant(X)
-#model = sm.OLS(y,X_sm)
-#model.fit().summary()
+X = sm.add_constant(X)
+model = sm.OLS(y,X_sm)
+model.fit().summary()
 
 #Lasso regression
 #Random Forest
