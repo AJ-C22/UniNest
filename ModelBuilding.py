@@ -38,7 +38,27 @@ X = sm.add_constant(X)
 model = sm.OLS(y,X_sm)
 model.fit().summary()
 
+from sklearn.linear_model import LinearRegression, Lasso
+from sklearn.model_selection import cross_val_score
+
+lm = LinearRegression()
+lm.fit(X_train, y_train)
+
+np.mean(cross_val_score(lm, X_train, y_train, scoring = 'neg_mean_absolute_error'))
+
 #Lasso regression
+lm_l = Lasso()
+np.mean(cross_val_score(lm_l, X_train, y_train, scoring = "neg_mean_absolute_error", cv = 3))
+
+alpha = []
+error = []
+
+for i in range(1, 100):
+    alpha.append(i/10)
+    lml = Lasso(alpha=(i/100))
+    error.append(np.mean(cross_val_score(lml, X_train, y_train, scoring = "neg_mean_asbolute_error", cv = 3)))
+
+plt.plot(alpha,error)
 #Random Forest
 #Tune models
 #Test Ensembles
