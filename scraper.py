@@ -38,7 +38,7 @@ for i in range(0,13):
     #open csv file and write header name
     filename = 'guelph.csv'
     f = open(filename, 'a')
-    headers = 'Location,Title,Price,Style,Bedrooms,Bathrooms,Size,Air Conditioned  \n'
+    headers = 'Location,Title,Price,Style,Bedrooms,Bathrooms,Size,Air Conditioned\n'
     f.write(headers)
 
     print("check 1")
