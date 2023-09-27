@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt 
 import numpy as np 
 
+
 df = pd.read_csv('housing_cleaned.csv')
 df2 = pd.read_csv('housing_cleaned.csv')
 
@@ -47,7 +48,8 @@ lm.fit(X_train, y_train)
 np.mean(cross_val_score(lm, X_train, y_train, scoring = 'neg_mean_absolute_error'))
 
 #Lasso regression
-lm_l = Lasso()
+lm_l = Lasso(alpha = .99)
+lm_l.fit (X_train, y_train)
 np.mean(cross_val_score(lm_l, X_train, y_train, scoring = "neg_mean_absolute_error", cv = 3))
 
 alpha = []
@@ -59,7 +61,24 @@ for i in range(1, 100):
     error.append(np.mean(cross_val_score(lml, X_train, y_train, scoring = "neg_mean_absolute_error", cv = 3)))
 
 plt.plot(alpha,error)
+
+err = tuple(zip(alpha, error))
+df_err = pd.DataFrame(err, columns = ['alpha', 'error'])
+df_err[df_err.error == max(df_err.error)]
+
 #Random Forest
+from sklearn.ensemble import RandomForestRegressor
+rf = RandomForestRegressor()
+
+np.mean(cross_val_score(rf, X_train, y_train, scoring = "neg_mean_absolute_error", cv = 3))
+
 #Tune models
 #Test Ensembles
+tpred_lm = lm.predict(X_test)
+tpred_lml = lm_l.predict(X_test)
+
+from sklearn.metrics import mean_absolute_error
+print(mean_absolute_error(y_test, tpred_lm))
+print(mean_absolute_error(y_test, tpred_lml))
+
 
