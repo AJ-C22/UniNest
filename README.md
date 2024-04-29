@@ -34,6 +34,8 @@ View the Dashboard: https://public.tableau.com/views/HousingPriceBoard/Dashboard
 ## Machine Learning Model
 Trained a multiple linear regression model with sklearn (accuracy ~70-80%) to predict housing data based off the information I scraped and cleaned. Deployed the model using a Flask API.
 
+![image](https://github.com/AJ-C22/DS-Uni-Housing-Market-Projection/assets/114104270/8a64041d-16e2-4446-8a1d-9c786a968e80)
+
 ## Resources & Packages Used
 **Python Version:** 3.11.4
 
