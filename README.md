@@ -1,4 +1,4 @@
-# Uni Housing Market Projection Project: Overview
+# UniNest: Housing Price Estimator
 **Medium Artcile:**
 
 Data geared project designed to project housing market prices in University cities
